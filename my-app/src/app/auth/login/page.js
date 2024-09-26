@@ -40,43 +40,84 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 shadow-md rounded-md w-full max-w-md">
-        <h2 className="text-3xl font-semibold text-center mb-6">Log in to your Account</h2>
-        <form onSubmit={handleLogin} className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium">Email</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="border rounded-md p-2 w-full mt-1 focus:ring focus:ring-blue-300"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium">Password</label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="border rounded-md p-2 w-full mt-1 focus:ring focus:ring-blue-300"
-              required
-            />
-          </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>} {/* Error message */}
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-300 disabled:opacity-50"
-            disabled={loading}
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </form>
+    // <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    //   <div className="bg-white p-8 shadow-md rounded-md w-full max-w-md">
+    //     <h2 className="text-3xl font-semibold text-center mb-6">Log in to your Account</h2>
+    //     <form onSubmit={handleLogin} className="space-y-6">
+    //       <div>
+    //         <label className="block text-sm font-medium">Email</label>
+    //         <input
+    //           type="email"
+    //           placeholder="Enter your email"
+    //           value={email}
+    //           onChange={(e) => setEmail(e.target.value)}
+    //           className="border rounded-md p-2 w-full mt-1 focus:ring focus:ring-blue-300"
+    //           required
+    //         />
+    //       </div>
+    //       <div>
+    //         <label className="block text-sm font-medium">Password</label>
+    //         <input
+    //           type="password"
+    //           placeholder="Enter your password"
+    //           value={password}
+    //           onChange={(e) => setPassword(e.target.value)}
+    //           className="border rounded-md p-2 w-full mt-1 focus:ring focus:ring-blue-300"
+    //           required
+    //         />
+    //       </div>
+    //       {error && <p className="text-red-500 text-sm">{error}</p>} {/* Error message */}
+    //       <button
+    //         type="submit"
+    //         className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-300 disabled:opacity-50"
+    //         disabled={loading}
+    //       >
+    //         {loading ? "Logging in..." : "Login"}
+    //       </button>
+    //     </form>
       
+    //   </div>
+    // </div>
+
+ 
+    <div className="flex flex-col justify-center items-center min-h-screen bg-gray-200">
+  <div className="bg-white p-6 border border-gray-300 rounded w-80">
+    <h2 className="text-xl font-medium text-center mb-4">Log in</h2>
+    <form onSubmit={handleLogin} className="space-y-4">
+      <div>
+        <label className="block text-sm font-medium mb-1">Email</label>
+        <input
+          type="email"
+          placeholder="Enter email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="border p-2 w-full rounded"
+          required
+        />
       </div>
-    </div>
+      <div>
+        <label className="block text-sm font-medium mb-1">Password</label>
+        <input
+          type="password"
+          placeholder="Enter password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="border p-2 w-full rounded"
+          required
+        />
+      </div>
+      {error && <p className="text-red-600 text-sm">{error}</p>}
+      <button
+        type="submit"
+        className="w-full bg-blue-500 text-white py-2 rounded"
+        disabled={loading}
+      >
+        {loading ? "Logging in..." : "Login"}
+      </button>
+    </form>
+  </div>
+</div>
+
+
   );
 }

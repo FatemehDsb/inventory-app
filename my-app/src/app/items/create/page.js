@@ -76,39 +76,44 @@ export default function CreateItemPage() {
 }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold">Create New Item</h1>
-      {error && <p className="text-red-500">{error}</p>}
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Item Name"
-        required
-      />
-      <textarea
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        placeholder="Item Description"
-        required
-      />
-      <input
-        type="number"
-        value={quantity || ''} // Ensure it doesn't go undefined
-        onChange={(e) => setQuantity(e.target.value ? parseInt(e.target.value, 10) : '')} // Handle empty case
-        placeholder="Quantity"
-        required
-      />
-      <input
-        type="text"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        placeholder="Category"
-        required
-      />
-      <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-        Create Item
-      </button>
-    </form>
+
+    <form onSubmit={handleSubmit} style={{ maxWidth: "400px", margin: "20px auto", padding: "10px", border: "1px solid #ccc" }}>
+    <h1 style={{ fontSize: "20px", marginBottom: "10px" }}>Create New Item</h1>
+    {error && <p style={{ color: "red", marginBottom: "10px" }}>{error}</p>}
+    <input
+      type="text"
+      value={name}
+      onChange={(e) => setName(e.target.value)}
+      placeholder="Item Name"
+      required
+      style={{ marginBottom: "10px", padding: "5px", width: "100%" }}
+    />
+    <textarea
+      value={description}
+      onChange={(e) => setDescription(e.target.value)}
+      placeholder="Item Description"
+      required
+      style={{ marginBottom: "10px", padding: "5px", width: "100%", height: "80px" }}
+    />
+    <input
+      type="number"
+      value={quantity || ""}
+      onChange={(e) => setQuantity(e.target.value ? parseInt(e.target.value, 10) : "")}
+      placeholder="Quantity"
+      required
+      style={{ marginBottom: "10px", padding: "5px", width: "100%" }}
+    />
+    <input
+      type="text"
+      value={category}
+      onChange={(e) => setCategory(e.target.value)}
+      placeholder="Category"
+      required
+      style={{ marginBottom: "10px", padding: "5px", width: "100%" }}
+    />
+    <button type="submit" style={{ padding: "5px 10px", backgroundColor: "#007bff", color: "#fff", border: "none", cursor: "pointer" }}>
+      Create Item
+    </button>
+  </form>
   );
 }

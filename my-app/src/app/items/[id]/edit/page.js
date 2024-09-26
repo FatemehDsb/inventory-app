@@ -99,63 +99,66 @@ export default function EditItemPage() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Edit Item</h1>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block text-lg">Name</label>
+    <div style={{ maxWidth: "400px", margin: "20px auto", padding: "20px", border: "1px solid #ccc" }}>
+      <h1 style={{ fontSize: "24px", marginBottom: "15px" }}>Edit Item</h1>
+
+      <form onSubmit={handleSubmit}>
+        <div style={{ marginBottom: "10px" }}>
+          <label htmlFor="name" style={{ display: "block", marginBottom: "5px" }}>Name</label>
           <input
             type="text"
             id="name"
             name="name"
             value={itemData.name}
             onChange={handleChange}
-            className="border p-2 w-full"
+            style={{ width: "100%", padding: "8px", border: "1px solid #ccc" }}
           />
         </div>
 
-        <div>
-          <label htmlFor="description" className="block text-lg">Description</label>
+        <div style={{ marginBottom: "10px" }}>
+          <label htmlFor="description" style={{ display: "block", marginBottom: "5px" }}>Description</label>
           <textarea
             id="description"
             name="description"
             value={itemData.description}
             onChange={handleChange}
-            className="border p-2 w-full"
+            style={{ width: "100%", padding: "8px", border: "1px solid #ccc", height: "80px" }}
           />
         </div>
 
-        <div>
-          <label htmlFor="quantity" className="block text-lg">Quantity</label>
+        <div style={{ marginBottom: "10px" }}>
+          <label htmlFor="quantity" style={{ display: "block", marginBottom: "5px" }}>Quantity</label>
           <input
             type="number"
             id="quantity"
             name="quantity"
             value={itemData.quantity}
             onChange={handleChange}
-            className="border p-2 w-full"
+            style={{ width: "100%", padding: "8px", border: "1px solid #ccc" }}
           />
         </div>
 
-        <div>
-          <label htmlFor="category" className="block text-lg">Category</label>
+        <div style={{ marginBottom: "10px" }}>
+          <label htmlFor="category" style={{ display: "block", marginBottom: "5px" }}>Category</label>
           <input
             type="text"
             id="category"
             name="category"
             value={itemData.category}
             onChange={handleChange}
-            className="border p-2 w-full"
+            style={{ width: "100%", padding: "8px", border: "1px solid #ccc" }}
           />
         </div>
 
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p style={{ color: "red", marginBottom: "10px" }}>{error}</p>}
 
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
+        <button type="submit" style={{ padding: "8px 12px", backgroundColor: "#007bff", color: "#fff", border: "none", cursor: "pointer" }}>
           Update Item
         </button>
       </form>
     </div>
+
+
   );
 }
