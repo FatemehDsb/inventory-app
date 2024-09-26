@@ -8,7 +8,6 @@ const prisma = new PrismaClient();
 export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url);
-    //const categories = searchParams.getAll('category');
     const categories = searchParams.get('category')?.split(",") || [];
     const inStock = searchParams.get('inStock');
 
@@ -35,36 +34,32 @@ export async function GET(req) {
   }
 }
 
+// POST REQUEST
 export async function POST(req) {
+  //Extract Token from Request Headers 
   const token = req.headers.get("authorization")?.replace("Bearer ", "");
-  
-  console.log("Received token:", token);
-
+  //a function that verifies the validity of the JWT token
   const user = await verifyJWT(token);
-
+  //user will contain user information
   if (!user) {
     console.log("Unauthorized - No valid token found");
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
-
+//Extract Data from Request Body
   try {
     const { name, description, quantity, category } = await req.json();
     console.log("Received item data:", { name, description, quantity, category });
-    // Validate
-    /*if (!name || !description || quantity === undefined || !category) {
-      console.log("Missing fields in request body");
-      return NextResponse.json({ message: "All fields are required" }, { status: 400 });
-    }*/
-
-      const validation = validateItemData({ name, description, quantity, category});
+    //Data Validation
+    const validation = validateItemData({ name, description, quantity, category});
 
       if (!validation.valid) {
-        console.log(validation.message);  
+    
         return NextResponse.json({ message: validation.message }, { status: 400 });  
       }
 
     console.log("Creating new item with data:", { name, description, quantity, category });
 
+    //Use Prisma to create new item in database
     const newItem = await prisma.item.create({
       data: {
         name,
@@ -75,7 +70,8 @@ export async function POST(req) {
     });
 
     console.log("Item created:", newItem);
-
+    //
+    //Responding to the Client
     return NextResponse.json(newItem, { status: 201 });
   } catch (error) {
     const handledError = handleError(error);
