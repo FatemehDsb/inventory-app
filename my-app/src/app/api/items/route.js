@@ -5,24 +5,32 @@ import { verifyJWT } from "@/utils/helpers/authHelpers";
 
 const prisma = new PrismaClient();
 
+//Extrahering av Query-parametrar från URL
+//förbereder  filtreringsparametrar (categories och inStock)
 export async function GET(req) {
   try {
     const { searchParams } = new URL(req.url);
+    //hämtas värdet av parametern category från URL
     const categories = searchParams.get('category')?.split(",") || [];
+    //Hämtar värdet på inStock-parametern från URL
     const inStock = searchParams.get('inStock');
 
+    
     let filter = {};
 
   if (categories.length > 0) {
+    //uppdatera filter objekt med en property som heter category
     filter.category = {
-      in: categories,
+      in: categories, 
     };
   }
-
+  //Kontroll av inStock-värde
   if (inStock !== null) {
+    //Om inStock är "true", endast produkter där quantity  är större än 0 kommer att hämtas
   filter.quantity = inStock === "true" ? { gt: 0 } : { lte: 0 };
   }
 
+  //***hämta datan från databasen för att filtera basera på filter objekt */
     const items = await prisma.item.findMany({
       where: filter,
     });

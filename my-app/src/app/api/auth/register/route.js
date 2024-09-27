@@ -16,7 +16,7 @@ export async function POST(req) {
     const existingUser = await prisma.user.findUnique({
         where: { email },
     });
-    if (existingUser) {
+    if (existingUser) {//returneras en statuskod 400 
         return NextResponse.json({ message: "User already exists"}, { status: 400 });
     }
 
@@ -30,8 +30,7 @@ export async function POST(req) {
         },
     });
 
-    //const token = await signJWT({ userId: newUser.id });
-    //const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" }); 
+  
     const token = await signJWT({ userId: newUser.id });
 
     return NextResponse.json(

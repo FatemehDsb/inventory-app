@@ -9,6 +9,7 @@ export async function GET(req, { params }) {
   const { id } = params;
 
 try {
+  // **Hämta datan från databasen 
   const item = await prisma.item.findUnique({
     where: { id: parseInt(id, 10) },
   });
